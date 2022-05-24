@@ -1,0 +1,7 @@
+flutter_application_id:
+  android:
+    id: "app.momo.com"
+    name: "Momo"
+  ios:
+    id: "app.momo.com"
+    name: "Momo"
