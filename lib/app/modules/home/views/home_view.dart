@@ -12,13 +12,15 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(AppImage.banner, width: double.infinity),
-            SizedBox(
-              height: 110,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+              child: SizedBox(
+                height: 90,
                 child: ListView.separated(
+                  controller: controller.scrollController,
                   itemCount: controller.categories.length,
                   scrollDirection: Axis.horizontal,
                   separatorBuilder: (BuildContext context, int index) {
@@ -59,7 +61,45 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            Text('dsadsa'),
+            Center(
+              child: Obx(
+                () => DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [0, 1]
+                        .asMap()
+                        .entries
+                        .map((e) => Material(
+                              color: controller.categoryTab.value == e.key
+                                  ? context.primary
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(20),
+                              child: InkWell(
+                                child: const SizedBox(width: 25, height: 4),
+                                onTap: () {
+                                  controller.jumToPage(e.key);
+                                },
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: 'Newsfeed'
+                  .text
+                  .size(18)
+                  .color(AppTheme.titleColor)
+                  .semiBold
+                  .make(),
+            ),
           ],
         ),
       ),
