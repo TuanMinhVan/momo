@@ -8,6 +8,7 @@ abstract class Routes {
   static const resetPassword = _Paths.resetPassword;
   static const verifyOtp = _Paths.verifyOtp;
   static const dashboard = _Paths.dashboard;
+  static const comment = _Paths.comment;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const resetPassword = '/reset-password';
   static const verifyOtp = '/verify-otp';
   static const dashboard = '/dashboard';
+  static const comment = '/comment';
 }

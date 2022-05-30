@@ -18,7 +18,7 @@ class RootApp extends StatelessWidget {
     );
 
     return ScreenUtilInit(
-      designSize: const Size(1125, 2436),
+      designSize: const Size(375, 667),
       minTextAdapt: true,
       splitScreenMode: false,
       builder: (BuildContext context, Widget? child) {

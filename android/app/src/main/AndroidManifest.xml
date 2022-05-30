@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.momo">
    <application
-        android:label="momo"
+        android:label="Momo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

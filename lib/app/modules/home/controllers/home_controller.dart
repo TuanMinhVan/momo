@@ -1,6 +1,5 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../core/styles/style.dart';
 
 class CategoryItem {
   CategoryItem(this.title, this.icon);
@@ -9,6 +8,8 @@ class CategoryItem {
 
 class HomeController extends GetxController {
   late ScrollController scrollController;
+  final categoryTab = 0.obs;
+
   final categories = <CategoryItem>[
     CategoryItem('Leave Balance', 'assets/icons/calendar.png'),
     CategoryItem('My Appraisal', 'assets/icons/check.png'),
@@ -19,7 +20,6 @@ class HomeController extends GetxController {
     CategoryItem('Meeting Room', 'assets/icons/room.png'),
     CategoryItem('Overtime', 'assets/icons/time.png'),
   ];
-  final categoryTab = 0.obs;
 
   @override
   void onInit() {

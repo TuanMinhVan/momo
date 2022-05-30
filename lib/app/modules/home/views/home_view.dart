@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../core/styles/style.dart';
 import '../../../core/utilities/image.dart';
+import '../../../widgets/post_item.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -15,10 +16,10 @@ class HomeView extends GetView<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(AppImage.banner, width: double.infinity),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-              child: SizedBox(
-                height: 90,
+            SizedBox(
+              height: 110,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
                 child: ListView.separated(
                   controller: controller.scrollController,
                   itemCount: controller.categories.length,
@@ -92,13 +93,40 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: 'Newsfeed'
-                  .text
-                  .size(18)
-                  .color(AppTheme.titleColor)
-                  .semiBold
-                  .make(),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  'Newsfeed'
+                      .text
+                      .color(AppTheme.titleColor)
+                      .size(21)
+                      .semiBold
+                      .make(),
+                ],
+              ),
+            ),
+            ListView.separated(
+              itemCount: 2,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(0),
+              physics: const NeverScrollableScrollPhysics(),
+              separatorBuilder: (_, int index) {
+                return Container(height: 5, color: Colors.grey[300]);
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return const PostItem(
+                  auth: 'Steven Chong',
+                  content:
+                      'Hi guys, our new self-learning program is launched today! The topic is super hot and I think everyone of you has once thought about it. Discover now!',
+                  date: '3 days',
+                  image: AppImage.postImage,
+                  avatar: AppImage.userAvatar,
+                  comment: 98,
+                  like: 245,
+                  icons: ['like', 'love', 'sad'],
+                );
+              },
             ),
           ],
         ),

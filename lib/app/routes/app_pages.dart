@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/comment/bindings/comment_binding.dart';
+import '../modules/comment/views/comment_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/forgot-password/bindings/forgot_password_binding.dart';
@@ -20,7 +22,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const initial = Routes.login;
+  static const initial = Routes.dashboard;
 
   static final routes = [
     GetPage(
@@ -53,6 +55,11 @@ class AppPages {
         NotificationBinding(),
         ProfileBinding(),
       ],
+    ),
+    GetPage(
+      name: _Paths.comment,
+      page: () => const CommentView(),
+      binding: CommentBinding(),
     ),
   ];
 }

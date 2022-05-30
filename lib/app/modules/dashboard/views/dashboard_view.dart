@@ -17,42 +17,55 @@ class DashboardView extends GetView<DashboardController> {
     return DefaultTabController(
       length: controller.tabs.length,
       child: Scaffold(
-        body: const TabBarView(
-          children: [
+        body: TabBarView(
+          physics: const NeverScrollableScrollPhysics(),
+          controller: controller.tabController,
+          children: const [
             HomeView(),
             SearchView(),
             NotificationView(),
             ProfileView(),
           ],
         ),
-        bottomNavigationBar: Obx(
-          () => BottomNavigationBar(
-            currentIndex: controller.currentIndex,
-            type: BottomNavigationBarType.fixed,
-            unselectedLabelStyle: context.bodyText1.copyWith(fontSize: 12),
-            selectedLabelStyle: context.bodyText1.copyWith(fontSize: 12),
-            selectedItemColor: context.primary,
-            unselectedItemColor: const Color(0xffB9B9B9),
-            items: controller.tabs
-                .asMap()
-                .entries
-                .map(
-                  (e) => BottomNavigationBarItem(
-                    label: e.value.title,
-                    icon: SvgPicture.asset(
-                      e.value.icon,
-                      color: e.key == controller.currentIndex
-                          ? context.primary
-                          : null,
-                    ),
-                  ),
-                )
-                .toList(),
-            onTap: (int index) {
-              controller.currentIndex = index;
-            },
-          ),
-        ),
+        bottomNavigationBar: const _BottomTabBar(),
+      ),
+    );
+  }
+}
+
+class _BottomTabBar extends GetView<DashboardController> {
+  const _BottomTabBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => BottomNavigationBar(
+        currentIndex: controller.currentIndex,
+        type: BottomNavigationBarType.fixed,
+        unselectedLabelStyle: context.bodyText1.copyWith(fontSize: 12),
+        selectedLabelStyle: context.bodyText1.copyWith(fontSize: 12),
+        selectedItemColor: context.primary,
+        unselectedItemColor: const Color(0xffB9B9B9),
+        items: controller.tabs
+            .asMap()
+            .entries
+            .map(
+              (e) => BottomNavigationBarItem(
+                label: e.value.title,
+                icon: SvgPicture.asset(
+                  e.value.icon,
+                  color:
+                      e.key == controller.currentIndex ? context.primary : null,
+                ),
+              ),
+            )
+            .toList(),
+        onTap: (int index) {
+          controller.currentIndex = index;
+          controller.tabController.animateTo(index);
+        },
       ),
     );
   }
